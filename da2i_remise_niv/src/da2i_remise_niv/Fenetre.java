@@ -5,24 +5,25 @@
  */
 
 package da2i_remise_niv;
+
+
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 /**
  *
- * @author santc
+ * @author lambertc
  */
 public class Fenetre extends JFrame{
-
     public Fenetre(){
-	this.setTitle("fenetre");
-	this.setSize(400,500);
-	this.setLocationRelativeTo(null);
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setContentPane(new Panneau());
-	JPanel pan = new JPanel();
-	pan.setBackground(Color.WHITE);
-	this.setContentPane(pan);
-	this.setVisible(true);
+    this.setTitle("Ma première fenêtre Java");
+    this.setSize(400, 400);
+    this.setLocationRelativeTo(null);               
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setContentPane(new Init());
+    this.setBackground(Color.BLACK);
+    this.setVisible(true);
+
     }
 }
