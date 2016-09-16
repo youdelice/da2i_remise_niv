@@ -13,16 +13,20 @@ import java.awt.Graphics;
  *
  * @author lambertc
  */
-public class Da2i_remise_niv {
+public class Vaisseau extends Entite{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        Fenetre f = new Fenetre();
-
+    public Vaisseau(int x, int y) {
+        super.co = new Coordonne(x,y);
+        
+        
     }
- 
+    
+    public void GraphicVaisseau(Graphics g,Vaisseau v){
+        g.setColor(Color.red);
+        g.fillRect(v.co.x, v.co.y,20, 20);
+    }
+
+    
+    
     
 }

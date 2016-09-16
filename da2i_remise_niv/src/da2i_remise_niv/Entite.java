@@ -6,23 +6,15 @@
 
 package da2i_remise_niv;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  *
  * @author lambertc
  */
-public class Da2i_remise_niv {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        Fenetre f = new Fenetre();
-
-    }
- 
+public abstract class Entite {
+    
+    public Coordonne co;
+    
+    
+    
     
 }

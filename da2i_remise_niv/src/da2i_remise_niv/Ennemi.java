@@ -10,6 +10,6 @@ package da2i_remise_niv;
  *
  * @author lambertc
  */
-public class test {
+public class Ennemi {
     
 }
