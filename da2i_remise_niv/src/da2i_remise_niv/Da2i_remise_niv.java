@@ -14,6 +14,7 @@ import java.awt.Graphics;
  * @author lambertc
  */
 public class Da2i_remise_niv {
+    Init i = new Init();
 
     /**
      * @param args the command line arguments
@@ -21,9 +22,13 @@ public class Da2i_remise_niv {
     public static void main(String[] args) {
 
         Fenetre f = new Fenetre();
-
+        for (int i = 0; i < 10; i++) {
+            
+        }
+        
 
     }
+  
  
     
 }

@@ -16,14 +16,17 @@ import javax.swing.JPanel;
  * @author lambertc
  */
 public class Fenetre extends JFrame{
+    
     public Fenetre(){
-    this.setTitle("Ma première fenêtre Java");
+    this.setTitle("Space");
     this.setSize(400, 400);
     this.setLocationRelativeTo(null);               
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setContentPane(new Init());
     this.setBackground(Color.BLACK);
     this.setVisible(true);
-
+    
     }
+    
+    
 }

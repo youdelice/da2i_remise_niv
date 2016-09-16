@@ -14,7 +14,11 @@ public abstract class Entite {
     
     public Coordonne co;
     
-    
+    public void Bouger(int x, int y){
+        this.co.x += 10;
+        this.co.y += 10;
+        
+    }
     
     
 }

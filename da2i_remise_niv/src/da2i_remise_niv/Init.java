@@ -14,10 +14,16 @@ package da2i_remise_niv;
 import javax.swing.JPanel;
  
 public class Init extends JPanel { 
+    Vaisseau v = new Vaisseau(300,200);
+    
   public void paintComponent(Graphics g){
     //Vous verrez cette phrase chaque fois que la méthode sera invoquée
-    System.out.println("Je suis exécutée !"); 
-    Vaisseau v = new Vaisseau(300,200);
+    v.Bouger(v.co.x, v.co.y);
     v.GraphicVaisseau(g, v);
   }   
+  
+  public void Update(){
+     
+  }
+  
 }
