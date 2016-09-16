@@ -6,10 +6,21 @@
 
 package da2i_remise_niv;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author lambertc
  */
-public class Ennemi {
+public class Ennemi extends Entite{
+
+    public Ennemi(int x, int y){
+        super.co=new Coordonne(x,y);
+    }
     
+    public void GraphicEnnemi(Graphics g,Ennemi e){
+        g.setColor(Color.red);
+        g.fillRect(e.co.x, e.co.y,20, 20);
+    }
 }
