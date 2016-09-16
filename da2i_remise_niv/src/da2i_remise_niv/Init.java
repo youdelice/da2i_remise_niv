@@ -18,6 +18,8 @@ public class Init extends JPanel {
     //Vous verrez cette phrase chaque fois que la méthode sera invoquée
     System.out.println("Je suis exécutée !"); 
     Vaisseau v = new Vaisseau(300,200);
+    Ennemi e = new Ennemi(150,100);
     v.GraphicVaisseau(g, v);
+    e.GraphicEnnemi(g, e);
   }   
 }

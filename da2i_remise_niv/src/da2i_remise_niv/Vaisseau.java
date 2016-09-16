@@ -22,7 +22,7 @@ public class Vaisseau extends Entite{
     }
     
     public void GraphicVaisseau(Graphics g,Vaisseau v){
-        g.setColor(Color.red);
+        g.setColor(Color.green);
         g.fillRect(v.co.x, v.co.y,20, 20);
     }
 
