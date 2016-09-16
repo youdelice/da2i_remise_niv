@@ -6,29 +6,17 @@
 
 package da2i_remise_niv;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  *
  * @author lambertc
  */
-public class Da2i_remise_niv {
-    Init i = new Init();
+public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        Fenetre f = new Fenetre();
-        for (int i = 0; i < 10; i++) {
-            
+        new Fenetre();
         }
-        
-
-    }
-  
- 
     
 }

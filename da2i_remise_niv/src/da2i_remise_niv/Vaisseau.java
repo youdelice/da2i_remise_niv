@@ -16,15 +16,13 @@ import java.awt.Graphics;
 public class Vaisseau extends Entite{
 
     public Vaisseau(int x, int y) {
-        super.co = new Coordonne(x,y);
-        
-        
+        super.co = new Coordonne(x,y); 
+    }
+
+    public void setCo(Coordonne co) {
+        this.co = co;
     }
     
-    public void GraphicVaisseau(Graphics g,Vaisseau v){
-        g.setColor(Color.green);
-        g.fillRect(v.co.x, v.co.y,20, 20);
-    }
 
     
     

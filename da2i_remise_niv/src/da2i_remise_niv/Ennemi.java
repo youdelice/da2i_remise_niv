@@ -18,9 +18,10 @@ public class Ennemi extends Entite{
     public Ennemi(int x, int y){
         super.co=new Coordonne(x,y);
     }
-    
-    public void GraphicEnnemi(Graphics g,Ennemi e){
-        g.setColor(Color.red);
-        g.fillRect(e.co.x, e.co.y,20, 20);
+
+    public void setCo(Coordonne co) {
+        this.co = co;
     }
+    
+  
 }

@@ -6,8 +6,11 @@
 
 package da2i_remise_niv;
 
-
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,18 +18,21 @@ import javax.swing.JPanel;
  *
  * @author lambertc
  */
-public class Fenetre extends JFrame{
-    
+public class Fenetre extends JFrame {
+    Vaisseau v;
     public Fenetre(){
-    this.setTitle("Space");
-    this.setSize(400, 400);
+      this.setTitle("Ma première fenêtre Java");
+    this.setSize(300, 600);
     this.setLocationRelativeTo(null);               
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setContentPane(new Init());
+    this.setContentPane(new Jeu());
     this.setBackground(Color.BLACK);
+
     this.setVisible(true);
-    
+
     }
+
+    
     
     
 }

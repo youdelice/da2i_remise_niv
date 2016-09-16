@@ -14,9 +14,12 @@ public abstract class Entite {
     
     public Coordonne co;
     
-    public void Bouger(int x, int y){
+    public void Bouger(int x, int y,int z){
+        if(z<150){
+        this.co.x -= 10;
+        }else
         this.co.x += 10;
-        this.co.y += 10;
+      //  this.co.y += 10;
         
     }
     
