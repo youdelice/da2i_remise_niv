@@ -1,5 +1,6 @@
 package da2i_remise_niv;
 
+import bdd.Bdd;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -28,7 +29,11 @@ public class Game extends JFrame implements KeyListener {
     private JPanel contentPane;
     private JPanel panel_game;
     private JLabel lb_level;
+    private int score=0;
     public List<Alien> aliensLigne;
+
+    public JLabel lb_score;
+
 
     public List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
     
@@ -77,10 +82,12 @@ public class Game extends JFrame implements KeyListener {
         JSplitPane splitPane = new JSplitPane();
         splitPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         splitPane.setDividerSize(0);
+        splitPane.setDividerLocation(400);
         contentPane.add(splitPane, BorderLayout.NORTH);
 
-        JLabel lb_score = new JLabel("Score : 0000");
+        lb_score = new JLabel("Score :" + score);
         splitPane.setLeftComponent(lb_score);
+        lb_score.setSize(350, 50);
 
         JPanel panel_level = new JPanel();
         splitPane.setRightComponent(panel_level);
@@ -206,5 +213,15 @@ public class Game extends JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+    }
+    
+    public void setScore(int newScore)
+    {
+        this.score = newScore;
+    }
+    
+    public int getScore()
+    {
+        return this.score;
     }
 }
