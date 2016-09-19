@@ -1,4 +1,4 @@
-package metarion;
+package da2i_remise_niv;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
