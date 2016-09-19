@@ -1,4 +1,4 @@
-package metarion;
+package da2i_remise_niv;
 
 public class MouvementVaisseau extends Thread 
 {
@@ -24,10 +24,10 @@ public class MouvementVaisseau extends Thread
 			try 
 			{
 				Thread.sleep(50);
-			} catch (InterruptedException e) {
+			} catch (InterruptedException e) 
+                        {
 				e.printStackTrace();
 			}
 		}
-			
 	}
 }
