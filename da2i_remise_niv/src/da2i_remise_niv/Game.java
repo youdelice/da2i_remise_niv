@@ -116,13 +116,18 @@ public class Game extends JFrame implements KeyListener
 	private void ajoutAlien() 
 	{
 		aliens = new ArrayList<Alien>();
-
-		for(int i = 0; i < 4; i++)
+                
+		for(int i = 0; i < 8; i++)
 		{
+                    for (int j = 0; j < 5; j++) {
+
 			Alien alien = new Alien();
-			alien.setLocation(5 + i*45, 10);
+                       
+			alien.setLocation(5 + i*45, j*40);
+                    
 			panel_game.add(alien);
 			aliens.add(alien);
+                    }
 		}	
 	}
 
