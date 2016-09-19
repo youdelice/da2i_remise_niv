@@ -1,6 +1,5 @@
 package da2i_remise_niv;
 
-import bdd.Bdd;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
