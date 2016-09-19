@@ -15,7 +15,6 @@ public class Alien extends JPanel
 	public Alien(Game fenetre)
 	{
             this.fenetre=fenetre;
-		//this.setBorder(new LineBorder(Color.black));
 		this.setSize(new Dimension(40,40));
 	}
 	
@@ -28,10 +27,13 @@ public class Alien extends JPanel
 		g.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
 	}
         
+        public void tirer()
+        {
+            
+        }
+        
         public void removeAlien()
         {
             this.fenetre.getPanelGame().remove(this);
-            this.fenetre.getPanelGame().repaint();
-            this.fenetre.getPanelGame().revalidate();
         }
 }
