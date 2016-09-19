@@ -56,6 +56,9 @@ public class MouvementProjectile extends Thread {
 
                 try 
                 {
+                    this.game.setScore(this.game.getScore()+5);
+                    this.game.lb_score.setText("Score : " + this.game.getScore()); 
+                    System.out.println(this.game.getScore());
                     projectile = null;
                     this.join();
                     
