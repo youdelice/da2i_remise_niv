@@ -29,15 +29,6 @@ public class Game extends JFrame implements KeyListener {
     private JPanel panel_game;
     private JLabel lb_level;
     public List<Alien> aliensLigne;
-    
-//    public List<Alien> aliensCol0 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol1 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol2 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol3 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol4 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol5 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol6 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol7 = new ArrayList<Alien>();
 
     public List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
     
@@ -131,34 +122,6 @@ public class Game extends JFrame implements KeyListener {
                 panel_game.add(alien);
                 colonne.add(alien);
                 aliensLigne.add(alien);
-
-//                switch (i) {
-//                    case 0:
-//                        aliensCol0.add(alien);
-//                        break;
-//                    case 1:
-//                        aliensCol1.add(alien);
-//                        break;
-//                    case 2:
-//                        aliensCol2.add(alien);
-//                        break;
-//                    case 3:
-//                        aliensCol3.add(alien);
-//                        break;
-//                    case 4:
-//                        aliensCol4.add(alien);
-//                        break;
-//                    case 5:
-//                        aliensCol5.add(alien);
-//                        break;
-//                    case 6:
-//                        aliensCol6.add(alien);
-//                        break;
-//                    case 7:
-//                        aliensCol7.add(alien);
-//                        break;
-//                }
-
             }
             
             this.colonneAlien.add(colonne);
