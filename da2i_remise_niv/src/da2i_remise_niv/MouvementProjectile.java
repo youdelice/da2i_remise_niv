@@ -108,6 +108,9 @@ public class MouvementProjectile extends Thread
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+                        
+                        
+                        
 		}
 		
                 if(!projectile.isValid())
