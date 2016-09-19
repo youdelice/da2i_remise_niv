@@ -37,7 +37,7 @@ public class Vaisseau extends JPanel
 		p.x += (int)this.getSize().getWidth() / 2;
 		
 		Projectile projectile = new Projectile(p, fenetre);	
-		MouvementProjectile mv = new MouvementProjectile(projectile);
+		MouvementProjectile mv = new MouvementProjectile(projectile,fenetre);
 		mv.start();
 	}
 }

@@ -10,9 +10,11 @@ import javax.swing.JPanel;
 public class Alien extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
+        Game fenetre;
 
-	public Alien()
+	public Alien(Game fenetre)
 	{
+            this.fenetre=fenetre;
 		//this.setBorder(new LineBorder(Color.black));
 		this.setSize(new Dimension(40,40));
 	}
@@ -25,4 +27,11 @@ public class Alien extends JPanel
 		
 		g.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
 	}
+        
+        public void removeAlien()
+        {
+            this.fenetre.getPanelGame().remove(this);
+            this.fenetre.getPanelGame().repaint();
+            this.fenetre.getPanelGame().revalidate();
+        }
 }

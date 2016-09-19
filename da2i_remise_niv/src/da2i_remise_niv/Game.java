@@ -1,6 +1,7 @@
 package da2i_remise_niv;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +28,17 @@ public class Game extends JFrame implements KeyListener
 	private JPanel contentPane;
 	private JPanel panel_game;
 	private JLabel lb_level;
-	private List<Alien> aliens;
+	public List<Alien> aliensLigne;
+        public List<Alien> aliensCol0 = new ArrayList<Alien>();
+        public List<Alien> aliensCol1 = new ArrayList<Alien>();
+        public List<Alien> aliensCol2 = new ArrayList<Alien>();
+        public List<Alien> aliensCol3 = new ArrayList<Alien>();
+        public List<Alien> aliensCol4 = new ArrayList<Alien>();
+        public List<Alien> aliensCol5 = new ArrayList<Alien>();
+        public List<Alien> aliensCol6 = new ArrayList<Alien>();
+        public List<Alien> aliensCol7 = new ArrayList<Alien>();
+        
+        
 	private Boolean cooldownTirer = false;
 	private MouvementVaisseau mv;
 
@@ -65,7 +76,7 @@ public class Game extends JFrame implements KeyListener
 
 	public Game() 
 	{
-		//setResizable(false);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 700);
 		contentPane = new JPanel();
@@ -104,6 +115,11 @@ public class Game extends JFrame implements KeyListener
 	{
 		ajoutAlien();
 		ajoutVaisseau();
+                
+                Alien a = new Alien(this);
+                a.setLocation(0, 0);
+                a.setBackground(Color.pink);
+                panel_game.add(a);
 	}
 
 	private void ajoutVaisseau() 
@@ -115,20 +131,45 @@ public class Game extends JFrame implements KeyListener
 
 	private void ajoutAlien() 
 	{
-		aliens = new ArrayList<Alien>();
+		aliensLigne = new ArrayList<Alien>();
                 
 		for(int i = 0; i < 8; i++)
 		{
                     for (int j = 0; j < 5; j++) {
-
-			Alien alien = new Alien();
-                       
-			alien.setLocation(5 + i*45, j*40);
-                    
+                        Alien alien = new Alien(this);                
+			alien.setLocation(5 + i*45, j*40);                 
 			panel_game.add(alien);
-			aliens.add(alien);
+			aliensLigne.add(alien);
+                        
+                        switch(i){
+                            case 0: 
+                                aliensCol0.add(alien);
+                                break;
+                            case 1: 
+                                aliensCol1.add(alien);
+                                break;
+                            case 2: 
+                                aliensCol2.add(alien);
+                                break;
+                            case 3: 
+                                aliensCol3.add(alien);
+                                break;
+                            case 4: 
+                                aliensCol4.add(alien);
+                                break;
+                            case 5: 
+                                aliensCol5.add(alien);
+                                break;
+                            case 6: 
+                                aliensCol6.add(alien);
+                                break;
+                            case 7: 
+                                aliensCol7.add(alien);
+                                break;
+                        }
+			
                     }
-		}	
+		}                
 	}
 
 	private void lancerJeu() 
@@ -144,7 +185,7 @@ public class Game extends JFrame implements KeyListener
 	{
 		int descendre = 0;
 
-		for(Alien alien : aliens)
+		for(Alien alien : aliensLigne)
 		{
 			if(panel_game.getWidth() <= alien.getX() + 50)
 			{
@@ -158,7 +199,7 @@ public class Game extends JFrame implements KeyListener
 			}		
 		}
 
-		for(Alien alien : aliens)
+		for(Alien alien : aliensLigne)
 		{
 			alien.setLocation(alien.getLocation().x + SENS_ALIEN, alien.getLocation().y + descendre);
 		}
@@ -186,7 +227,7 @@ public class Game extends JFrame implements KeyListener
 					cooldownTirer();
 				}
 
-			}, 1000);
+			}, 500);
 		}		
 
 		if(e.getKeyCode() == 81)
