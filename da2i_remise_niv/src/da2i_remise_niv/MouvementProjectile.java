@@ -20,64 +20,64 @@ public class MouvementProjectile extends Thread {
         p.y -= 15;
 
         while (projectile.getLocation().y > 10 && game.isEnCours) {
-            p = projectile.getLocation();
+            try {
+                p = projectile.getLocation();
 
-            p.y -= 10;
+                p.y -= 10;
 
-            projectile.setLocation(p);
+                projectile.setLocation(p);
 
-            List<Integer> indexVide = new ArrayList<Integer>();
-            
-            for (List<Alien> aliens : game.colonneAlien) 
-            {
+                List<Integer> indexVide = new ArrayList<Integer>();
+
+                for (List<Alien> aliens : game.colonneAlien) {
                     for (Alien alien : aliens) {
                         colision(aliens, alien.getX(), alien.getY(), alien);
                     }
-                    
-                    if(aliens.isEmpty())
-                            indexVide.add(game.colonneAlien.indexOf(aliens));
-            }
 
-            for(int i : indexVide)
-                game.colonneAlien.remove(i);
-            
-            if(game.colonneAlien.isEmpty())
-            {
-                game.stopJeu();
-                JOptionPane.showMessageDialog(null, "GG");
-            }
-            
-            try {
+                    if (aliens.isEmpty()) {
+                        indexVide.add(game.colonneAlien.indexOf(aliens));
+                    }
+                }
+
+                for (int i : indexVide) {
+                    game.colonneAlien.remove(i);
+                }
+
+                if (game.colonneAlien.isEmpty()) {
+                    game.stopJeu();
+                    JOptionPane.showMessageDialog(null, "GG");
+                }
+
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Mouvement projectile : " + e.getMessage());
             }
         }
         projectile.removeProjectile();
     }
 
     public void colision(List<Alien> aliens, int coX, int coY, Alien alien) {
-        if ((projectile.getY() >= coY) && (projectile.getY() <= coY + 40)) {
-            if ((projectile.getX() >= coX) && (projectile.getX() <= coX + 40)) {
-                System.out.println("touché ");
-                   
-                this.game.aliensLigne.remove(alien);
-                this.game.getPanelGame().remove(alien);
-                aliens.remove(alien);
+        try {
+            if ((projectile.getY() >= coY) && (projectile.getY() <= coY + 40)) {
+                if ((projectile.getX() >= coX) && (projectile.getX() <= coX + 40)) {
+                    System.out.println("touché ");
 
-                this.projectile.removeProjectile();
+                    this.game.aliensLigne.remove(alien);
+                    this.game.getPanelGame().remove(alien);
+                    aliens.remove(alien);
 
-                try {
+                    this.projectile.removeProjectile();
+
                     this.game.setScore(this.game.getScore() + 5);
                     this.game.lb_score.setText("Score : " + this.game.getScore());
-                   // System.out.println(this.game.getScore());
+                    // System.out.println(this.game.getScore());
                     projectile = null;
                     this.join();
 
-                } catch (Exception e) {
-                    System.out.println("MouvementProjectile colision : " + e.getMessage());
                 }
             }
+        } catch (Exception e) {
+            System.out.println("MouvementProjectile colision : " + e.getMessage());
         }
     }
 }

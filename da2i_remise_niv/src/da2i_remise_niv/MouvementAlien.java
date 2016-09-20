@@ -16,7 +16,7 @@ public class MouvementAlien extends Thread
                 fenetre.moveAlien();
                 Thread.sleep(100);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("MouvementAlien : " + e.getMessage());
             }
         }
     }

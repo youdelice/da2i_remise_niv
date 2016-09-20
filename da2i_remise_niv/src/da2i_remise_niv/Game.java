@@ -118,11 +118,11 @@ public class Game extends JFrame implements KeyListener {
     {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 1; i++) 
+        for (int i = 0; i < 8; i++) 
         { 
             List<Alien> colonne = new ArrayList<Alien>();
             
-            for (int j = 0; j < 1; j++) 
+            for (int j = 0; j < 5; j++) 
             {
                 Alien alien = new Alien(this);
                 alien.setLocation(5 + i * 45, j * 40);
