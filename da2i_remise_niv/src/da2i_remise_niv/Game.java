@@ -229,6 +229,5 @@ msgbox("don't touch that!");
     private void msgbox(String s)
     {
         JOptionPane.showMessageDialog(null, s);
-        JOptionPane.QUESTION_MESSAGE("test");
     }
 }
