@@ -4,12 +4,6 @@ import bdd.Bdd;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JSplitPane;
-import javax.swing.UIManager;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -19,8 +13,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
 public class Game extends JFrame implements KeyListener {
 
@@ -108,7 +108,7 @@ public class Game extends JFrame implements KeyListener {
         ajoutVaisseau();
     }
 
-    private void ajoutVaisseau() {
+    private void  ajoutVaisseau() {
         vaisseau = new Vaisseau(this);
         vaisseau.setLocation(200, 580);
         panel_game.add(vaisseau);
@@ -163,7 +163,7 @@ public class Game extends JFrame implements KeyListener {
         } catch (Exception e) {
 
         }
-
+msgbox("don't touch that!");
     }
 
     public JPanel getPanelGame() {
@@ -223,5 +223,12 @@ public class Game extends JFrame implements KeyListener {
     public int getScore()
     {
         return this.score;
+    }
+    
+    
+    private void msgbox(String s)
+    {
+        JOptionPane.showMessageDialog(null, s);
+        JOptionPane.QUESTION_MESSAGE("test");
     }
 }
