@@ -48,7 +48,7 @@ public class MouvementProjectile extends Thread {
                     JOptionPane.showMessageDialog(null, "GG");
                 }
 
-                Thread.sleep(50);
+                Thread.sleep(Vitesse.NOVICE.getProjectiles());
             } catch (InterruptedException e) {
                 System.out.println("Mouvement projectile : " + e.getMessage());
             }
@@ -70,7 +70,6 @@ public class MouvementProjectile extends Thread {
 
                     this.game.setScore(this.game.getScore() + 5);
                     this.game.lb_score.setText("Score : " + this.game.getScore());
-                    // System.out.println(this.game.getScore());
                     projectile = null;
                     this.join();
 

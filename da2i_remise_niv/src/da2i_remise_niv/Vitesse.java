@@ -11,7 +11,7 @@ package da2i_remise_niv;
  * @author santc
  */
 public enum Vitesse {
-    DEBUTANT(100, 50), NOVICE(75, 30),MAITRE(50, 20);
+    DEBUTANT(100, 50), NOVICE(75, 30), MAITRE(50, 20);
     
     private int vitesse, projectiles;  
       

@@ -16,12 +16,12 @@ public class TireAlien extends Thread {
     @Override
     public void run() {
         while (fenetre.isEnCours) {
+            Timer t = new Timer();
             try {
                 Random rand = new Random();
                 
                 final int listAlien = (fenetre.colonneAlien.size()-1) == 0 ? 0 : rand.nextInt(fenetre.colonneAlien.size() - 1);
                 
-                Timer t = new Timer();
                 t.schedule(new TimerTask() {
                     
                     @Override
@@ -37,10 +37,11 @@ public class TireAlien extends Thread {
                 }, rand.nextInt(2500));
 
                 Thread.sleep(1250);
-            } catch (Exception e) {
+            } catch (Exception e) 
+            {
                    System.out.println("TireAlien : " + e.getMessage());
             }
-
+             t.cancel();
         }
     }
 }

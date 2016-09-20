@@ -40,9 +40,7 @@ public class MouvementProjectileAlien extends Thread {
                     System.out.println("touché ");
 
                     this.projectile.removeProjectile();
-                    fenetre.stopJeu();
-
-                    JOptionPane.showMessageDialog(null, "Game Over");
+                    fenetre.gameOver();
 
                     projectile = null;
                     this.join();

@@ -14,7 +14,7 @@ public class MouvementAlien extends Thread
         while (fenetre.isEnCours) {
             try {
                 fenetre.moveAlien();
-                Thread.sleep(100);
+                Thread.sleep(Vitesse.NOVICE.getVitesse());
             } catch (Exception e) {
                 System.out.println("MouvementAlien : " + e.getMessage());
             }
