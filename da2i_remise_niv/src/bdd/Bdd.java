@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 /**
@@ -72,6 +73,18 @@ public class Bdd {
         return ret;
     }
     public List<Score> getAllScore() throws SQLException{
-        
+        List<Score> ret = new ArrayList();
+        Statement req = c.createStatement();
+        ResultSet rs = req.executeQuery("SELECT * FROM score;");
+        while(rs.next()){
+            int id = rs.getInt("id");
+            String pseudo = rs.getString("pseudo");
+            int score = rs.getInt("score");
+            String dateTp = rs.getString("dateDone");
+            String[] dateTps = dateTp.split("-");
+            Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
+            ret.add(new Score(id,pseudo,score,dateDone));
+        }
+        return ret;
     }
 }
