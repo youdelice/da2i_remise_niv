@@ -34,9 +34,9 @@ public class TireAlien extends Thread {
                             System.out.println("TireAlien task : " + e.getMessage());
                         }
                     }
-                }, rand.nextInt(2500));
+                }, rand.nextInt(1250));
 
-                Thread.sleep(1250);
+                Thread.sleep(250);
             } catch (Exception e) 
             {
                    System.out.println("TireAlien : " + e.getMessage());
