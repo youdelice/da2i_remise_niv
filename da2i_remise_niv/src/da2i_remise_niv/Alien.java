@@ -3,6 +3,7 @@ package da2i_remise_niv;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -29,7 +30,14 @@ public class Alien extends JPanel
         
         public void tirer()
         {
+            Point location = this.getLocation();
             
+            location.x += this.getSize().width / 2;
+            
+            Projectile p = new Projectile(location, fenetre, false);
+            
+            MouvementProjectileAlien mv = new MouvementProjectileAlien(p, fenetre);
+            mv.start();
         }
         
         public void removeAlien()

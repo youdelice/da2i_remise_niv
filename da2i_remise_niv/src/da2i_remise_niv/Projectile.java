@@ -12,14 +12,12 @@ public class Projectile extends JPanel
 	
 	private Game fenetre;
 	
-	public Projectile(Point p, Game fenetre) //Point p, Game fenetre
+	public Projectile(Point p, Game fenetre, Boolean isVaisseau) //Point p, Game fenetre
 	{
 		this.fenetre = fenetre; 
 		
 		this.setSize(new Dimension(5, 15));
-		this.setBackground(Color.RED);
-
-		p.y -= this.getHeight();
+		this.setBackground(isVaisseau ? Color.BLUE : Color.RED);
 		
 		this.setLocation(p);
 		
