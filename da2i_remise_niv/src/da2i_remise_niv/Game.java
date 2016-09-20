@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.UIManager;
+import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -28,9 +29,11 @@ public class Game extends JFrame implements KeyListener {
 
     private JPanel contentPane;
     private JPanel panel_game;
+    private JPanel panel;
     private JLabel lb_level;
     private int score=0;
     public List<Alien> aliensLigne;
+    private int niveau=0;
 
     public JLabel lb_score;
 
@@ -43,6 +46,8 @@ public class Game extends JFrame implements KeyListener {
     public Vaisseau vaisseau;
     public int SENS_ALIEN = 10; // -10 = gauche     10 = droite
     public int SENS_VAISSEAU = 0;  // -8 = gauche   0 = immobile    8 = droite
+    boolean fini = false;
+    public String name;
 
     Set<String> keyPressed = new HashSet<String>();
 
@@ -64,8 +69,17 @@ public class Game extends JFrame implements KeyListener {
             }
         });
     }
+    
+    public void nom(){
+        name = JOptionPane.showInputDialog("");
+        if(name.isEmpty()){
+           System.exit(0);
+        }
+        
+    }
 
     public Game() {
+        nom();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 700);
@@ -93,8 +107,9 @@ public class Game extends JFrame implements KeyListener {
         splitPane.setRightComponent(panel_level);
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        lb_level = new JLabel("Niveau : 1");
+        lb_level = new JLabel("Niveau : " + niveau);
         panel_level.add(lb_level);
+        
 
         creerPlateau();
 
@@ -118,11 +133,11 @@ public class Game extends JFrame implements KeyListener {
     {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 8; i++) 
+        for (int i = 0; i < 1; i++) 
         { 
             List<Alien> colonne = new ArrayList<Alien>();
             
-            for (int j = 0; j < 5; j++) 
+            for (int j = 0; j < 1; j++) 
             {
                 Alien alien = new Alien(this);
                 alien.setLocation(5 + i * 45, j * 40);
@@ -163,7 +178,8 @@ public class Game extends JFrame implements KeyListener {
         } catch (Exception e) {
 
         }
-msgbox("don't touch that!");
+
+        gameOver();
     }
 
     public JPanel getPanelGame() {
@@ -225,9 +241,12 @@ msgbox("don't touch that!");
         return this.score;
     }
     
-    
-    private void msgbox(String s)
-    {
-        JOptionPane.showMessageDialog(null, s);
+    public void gameOver(){
+        if(aliensLigne.isEmpty() && !fini){
+            JOptionPane.showMessageDialog(null, "GG");
+            fini = true;
+            this.niveau+=2;
+            lancerJeu();
+        }
     }
 }
