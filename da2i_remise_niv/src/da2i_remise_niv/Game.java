@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JOptionPane;
 
 import javax.swing.border.BevelBorder;
 
@@ -28,17 +29,13 @@ public class Game extends JFrame implements KeyListener {
 
     private JPanel contentPane;
     private JPanel panel_game;
+    private JPanel panel;
     private JLabel lb_level;
+    private int score=0;
     public List<Alien> aliensLigne;
-    
-//    public List<Alien> aliensCol0 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol1 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol2 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol3 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol4 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol5 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol6 = new ArrayList<Alien>();
-//    public List<Alien> aliensCol7 = new ArrayList<Alien>();
+
+    public JLabel lb_score;
+
 
     public List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
     
@@ -48,6 +45,8 @@ public class Game extends JFrame implements KeyListener {
     public Vaisseau vaisseau;
     public int SENS_ALIEN = 10; // -10 = gauche     10 = droite
     public int SENS_VAISSEAU = 0;  // -8 = gauche   0 = immobile    8 = droite
+    boolean fini = false;
+    public String name;
 
     Set<String> keyPressed = new HashSet<String>();
 
@@ -69,8 +68,17 @@ public class Game extends JFrame implements KeyListener {
             }
         });
     }
+    
+    public void nom(){
+        name = JOptionPane.showInputDialog("");
+        if(name.isEmpty()){
+           System.exit(0);
+        }
+        
+    }
 
     public Game() {
+        nom();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 700);
@@ -87,10 +95,12 @@ public class Game extends JFrame implements KeyListener {
         JSplitPane splitPane = new JSplitPane();
         splitPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         splitPane.setDividerSize(0);
+        splitPane.setDividerLocation(400);
         contentPane.add(splitPane, BorderLayout.NORTH);
 
-        JLabel lb_score = new JLabel("Score : 0000");
+        lb_score = new JLabel("Score :" + score);
         splitPane.setLeftComponent(lb_score);
+        lb_score.setSize(350, 50);
 
         JPanel panel_level = new JPanel();
         splitPane.setRightComponent(panel_level);
@@ -98,6 +108,7 @@ public class Game extends JFrame implements KeyListener {
 
         lb_level = new JLabel("Niveau : 1");
         panel_level.add(lb_level);
+        
 
         creerPlateau();
 
@@ -121,45 +132,17 @@ public class Game extends JFrame implements KeyListener {
     {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 8; i++) 
+        for (int i = 0; i < 1; i++) 
         { 
             List<Alien> colonne = new ArrayList<Alien>();
             
-            for (int j = 0; j < 5; j++) 
+            for (int j = 0; j < 1; j++) 
             {
                 Alien alien = new Alien(this);
                 alien.setLocation(5 + i * 45, j * 40);
                 panel_game.add(alien);
                 colonne.add(alien);
                 aliensLigne.add(alien);
-
-//                switch (i) {
-//                    case 0:
-//                        aliensCol0.add(alien);
-//                        break;
-//                    case 1:
-//                        aliensCol1.add(alien);
-//                        break;
-//                    case 2:
-//                        aliensCol2.add(alien);
-//                        break;
-//                    case 3:
-//                        aliensCol3.add(alien);
-//                        break;
-//                    case 4:
-//                        aliensCol4.add(alien);
-//                        break;
-//                    case 5:
-//                        aliensCol5.add(alien);
-//                        break;
-//                    case 6:
-//                        aliensCol6.add(alien);
-//                        break;
-//                    case 7:
-//                        aliensCol7.add(alien);
-//                        break;
-//                }
-
             }
             
             this.colonneAlien.add(colonne);
@@ -194,6 +177,7 @@ public class Game extends JFrame implements KeyListener {
         } catch (Exception e) {
 
         }
+        gameOver();
 
     }
 
@@ -244,5 +228,22 @@ public class Game extends JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+    }
+    
+    public void setScore(int newScore)
+    {
+        this.score = newScore;
+    }
+    
+    public int getScore()
+    {
+        return this.score;
+    }
+    
+    public void gameOver(){
+        if(aliensLigne.isEmpty() && !fini){
+            JOptionPane.showMessageDialog(null, "GG");
+            fini = true;
+        }
     }
 }
