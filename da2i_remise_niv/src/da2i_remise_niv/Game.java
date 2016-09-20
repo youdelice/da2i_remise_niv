@@ -35,10 +35,13 @@ public class Game extends JFrame implements KeyListener {
     public JLabel lb_score;
 
 
-    public List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
+    public volatile List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
     
+    public Boolean isEnCours = true;
     private Boolean cooldownTirer = false;
     private MouvementVaisseau mv;
+    private MouvementAlien ma;
+    private TireAlien ta;
 
     public Vaisseau vaisseau;
     public int SENS_ALIEN = 10; // -10 = gauche     10 = droite
@@ -104,8 +107,8 @@ public class Game extends JFrame implements KeyListener {
     }
 
     private void creerPlateau() {
-        ajoutAlien();
         ajoutVaisseau();
+        ajoutAlien();
     }
 
     private void ajoutVaisseau() {
@@ -136,11 +139,14 @@ public class Game extends JFrame implements KeyListener {
     }
 
     private void lancerJeu() {
-        MouvementAlien ma = new MouvementAlien(this);
+        ma = new MouvementAlien(this);
         ma.start();
 
         mv = new MouvementVaisseau(this);
         mv.start();
+        
+        ta = new TireAlien(this);
+        ta.start();
     }
 
     public void moveAlien() {
@@ -165,6 +171,21 @@ public class Game extends JFrame implements KeyListener {
         }
 
     }
+    
+    public void stopJeu()
+    {
+        if(isEnCours)
+        {
+            isEnCours = false;  
+            this.keyPressed.clear();
+            this.SENS_VAISSEAU = 0;
+        }        
+        else
+        {
+            isEnCours = true;
+            lancerJeu();
+        }
+    }
 
     public JPanel getPanelGame() {
         return panel_game;
@@ -173,6 +194,8 @@ public class Game extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) // q = 81      d = 68		espace = 32
     {
+        System.out.println(e.getKeyCode());
+        
         this.keyPressed.add(String.valueOf(e.getKeyChar()));
 
         if (e.getKeyCode() == 32 && !cooldownTirer) {
@@ -189,6 +212,9 @@ public class Game extends JFrame implements KeyListener {
             }, 500);
         }
 
+        if(e.getKeyCode() == 27)
+            this.stopJeu();
+        
         if (e.getKeyCode() == 81) {
             this.SENS_VAISSEAU = -8;
         }

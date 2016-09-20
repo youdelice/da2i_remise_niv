@@ -11,7 +11,7 @@ public class MouvementAlien extends Thread
 
     @Override
     public void run() {
-        while (true) {
+        while (fenetre.isEnCours) {
             try {
                 fenetre.moveAlien();
                 Thread.sleep(100);

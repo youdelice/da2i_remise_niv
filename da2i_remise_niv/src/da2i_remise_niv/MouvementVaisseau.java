@@ -11,7 +11,7 @@ public class MouvementVaisseau extends Thread
 
 	public void run()
 	{
-		while(true)
+		while(fenetre.isEnCours)
 		{
 			if((15 >= fenetre.vaisseau.getX())  && (fenetre.SENS_VAISSEAU == -8))
 				fenetre.SENS_VAISSEAU = 0;
