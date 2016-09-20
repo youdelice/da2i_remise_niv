@@ -50,24 +50,7 @@ public class Game extends JFrame implements KeyListener {
 
     Set<String> keyPressed = new HashSet<String>();
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    Game frame = new Game();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    
     
     public void nom(){
         name = JOptionPane.showInputDialog("");
@@ -76,7 +59,7 @@ public class Game extends JFrame implements KeyListener {
         }
         
     }
-
+    
     public Game() {
         nom();
         setResizable(false);
