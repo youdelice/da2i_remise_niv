@@ -11,12 +11,12 @@ public class MouvementAlien extends Thread
 
     @Override
     public void run() {
-        while (true) {
+        while (fenetre.isEnCours) {
             try {
                 fenetre.moveAlien();
-                Thread.sleep(100);
+                Thread.sleep(Vitesse.NOVICE.getVitesse());
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("MouvementAlien : " + e.getMessage());
             }
         }
     }

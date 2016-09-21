@@ -2,15 +2,13 @@ package da2i_remise_niv;
 
 import bdd.Bdd;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
-import javax.swing.UIManager;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -29,18 +27,20 @@ public class Game extends JFrame implements KeyListener {
 
     private JPanel contentPane;
     private JPanel panel_game;
-    private JPanel panel;
     private JLabel lb_level;
-    private int score=0;
+    private int score = 0;
+    private int niveau = 1;
     public List<Alien> aliensLigne;
 
     public JLabel lb_score;
 
+    public volatile List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
 
-    public List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
-    
+    public Boolean isEnCours = true;
     private Boolean cooldownTirer = false;
     private MouvementVaisseau mv;
+    private MouvementAlien ma;
+    private TireAlien ta;
 
     public Vaisseau vaisseau;
     public int SENS_ALIEN = 10; // -10 = gauche     10 = droite
@@ -50,31 +50,12 @@ public class Game extends JFrame implements KeyListener {
 
     Set<String> keyPressed = new HashSet<String>();
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    Game frame = new Game();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    
-    public void nom(){
+    public void nom() {
         name = JOptionPane.showInputDialog("");
-        if(name.isEmpty()){
-           System.exit(0);
+        if (name.isEmpty()) {
+            System.exit(0);
         }
-        
+
     }
 
     public Game() {
@@ -106,20 +87,22 @@ public class Game extends JFrame implements KeyListener {
         splitPane.setRightComponent(panel_level);
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        lb_level = new JLabel("Niveau : 1");
+        lb_level = new JLabel("Niveau : " + niveau);
         panel_level.add(lb_level);
-        
 
         creerPlateau();
 
         this.addKeyListener(this);
 
+        Point p = new Point(260,400);
+        System.out.println(p.x + " " + p.y);
+        
         lancerJeu();
     }
 
     private void creerPlateau() {
-        ajoutAlien();
         ajoutVaisseau();
+        ajoutAlien();
     }
 
     private void ajoutVaisseau() {
@@ -128,33 +111,33 @@ public class Game extends JFrame implements KeyListener {
         panel_game.add(vaisseau);
     }
 
-    private void ajoutAlien() 
-    {
+    private void ajoutAlien() {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 1; i++) 
-        { 
+        for (int i = 0; i < 4; i++) {
             List<Alien> colonne = new ArrayList<Alien>();
-            
-            for (int j = 0; j < 1; j++) 
-            {
+
+            for (int j = 0; j < 5; j++) {
                 Alien alien = new Alien(this);
                 alien.setLocation(5 + i * 45, j * 40);
                 panel_game.add(alien);
                 colonne.add(alien);
                 aliensLigne.add(alien);
             }
-            
+
             this.colonneAlien.add(colonne);
         }
     }
 
     private void lancerJeu() {
-        MouvementAlien ma = new MouvementAlien(this);
+        ma = new MouvementAlien(this);
         ma.start();
 
         mv = new MouvementVaisseau(this);
         mv.start();
+
+        ta = new TireAlien(this);
+        ta.start();
     }
 
     public void moveAlien() {
@@ -171,14 +154,27 @@ public class Game extends JFrame implements KeyListener {
                 }
             }
 
-            for (Alien alien : aliensLigne) {
-                alien.setLocation(alien.getLocation().x + SENS_ALIEN, alien.getLocation().y + descendre);
+            if (aliensLigne.isEmpty()) {
+                finJeu();
+            } else {
+                for (Alien alien : aliensLigne) {
+                    alien.setLocation(alien.getLocation().x + SENS_ALIEN, alien.getLocation().y + descendre);
+                }
             }
         } catch (Exception e) {
-
+            System.out.println("moveAlien : " + e.getMessage());
         }
-        gameOver();
+    }
 
+    public void stopJeu() {
+        if (isEnCours) {
+            isEnCours = false;
+            this.keyPressed.clear();
+            this.SENS_VAISSEAU = 0;
+        } else {
+            isEnCours = true;
+            lancerJeu();
+        }
     }
 
     public JPanel getPanelGame() {
@@ -202,6 +198,10 @@ public class Game extends JFrame implements KeyListener {
                 }
 
             }, 500);
+        }
+
+        if (e.getKeyCode() == 27) {
+            this.stopJeu();
         }
 
         if (e.getKeyCode() == 81) {
@@ -229,21 +229,34 @@ public class Game extends JFrame implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
-    
-    public void setScore(int newScore)
-    {
+
+    public void setScore(int newScore) {
         this.score = newScore;
     }
-    
-    public int getScore()
-    {
+
+    public int getScore() {
         return this.score;
     }
-    
-    public void gameOver(){
-        if(aliensLigne.isEmpty() && !fini){
-            JOptionPane.showMessageDialog(null, "GG");
-            fini = true;
-        }
+
+    public void gameOver() {
+        stopJeu();
+        JOptionPane.showMessageDialog(null, "Game Over");
+    }
+
+    public void finJeu() {
+        stopJeu();
+        lb_level.setText("Niveau : " + ++niveau);
+        panel_game.removeAll();
+        ajoutVaisseau();
+        ajoutAlien();
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            
+            @Override
+            public void run() {
+                lancerJeu();
+            }
+            
+        }, 2000);
     }
 }
