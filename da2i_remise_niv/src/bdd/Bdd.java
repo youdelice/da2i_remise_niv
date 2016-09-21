@@ -41,10 +41,11 @@ public class Bdd {
         }
         return retun;
     }
-    public void addScore(String pseudo, int score, Date dateDone) throws SQLException{
-        int id = 0;
+    public void addScore(String pseudo, int score, String dateDone) {
+        try{
+            int id = 0;
         Statement req = c.createStatement();
-        ResultSet rs = req.executeQuery("SELECT max(id) FROM SCORE;");
+        ResultSet rs = req.executeQuery("SELECT max(id) as id FROM SCORE");
         int idmax = 0;
         while( rs.next()){
             idmax = rs.getInt("id");
@@ -53,9 +54,13 @@ public class Bdd {
         req.close();
         id = idmax + 1;
         Statement stmt = c.createStatement();
-        String dat = dateDone.getYear()+"-"+dateDone.getMonth()+"-"+dateDone.getDay();
-        stmt.executeUpdate("INSERT INTO score values("+id+",'"+pseudo+"',"+score+","+dat+");");
+        //String dat = dateDone.getYear()+"-"+dateDone.getMonth()+"-"+dateDone.getDay();
+        stmt.executeUpdate("INSERT INTO score(id, pseudo, score, datedone) values("+id+",'"+pseudo+"',"+score+",'"+dateDone+"')");
         stmt.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
     }
     public Score getBestScore() throws SQLException{
         Score ret = null;
@@ -91,4 +96,5 @@ public class Bdd {
         }
         return ret;
     }
+    
 }

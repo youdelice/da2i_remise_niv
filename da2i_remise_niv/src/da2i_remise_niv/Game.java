@@ -2,18 +2,14 @@ package da2i_remise_niv;
 
 import bdd.Bdd;
 import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JSplitPane;
-
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,8 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.UIManager;
-import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -41,7 +35,6 @@ public class Game extends JFrame implements KeyListener {
 
     public List<Alien> aliensLigne;
 
-
     public JLabel lb_score;
 
     public volatile List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
@@ -51,7 +44,12 @@ public class Game extends JFrame implements KeyListener {
     private MouvementVaisseau mv;
     private MouvementAlien ma;
     private TireAlien ta;
-
+    private Date date;
+    private int year, month,day;
+    private Calendar cal;
+    private Bdd bdd;
+    private String dateAuj;
+    
     public Vaisseau vaisseau;
     public int SENS_ALIEN = 10; // -10 = gauche     10 = droite
     public int SENS_VAISSEAU = 0;  // -8 = gauche   0 = immobile    8 = droite
@@ -116,7 +114,7 @@ public class Game extends JFrame implements KeyListener {
         ajoutAlien();
     }
 
-    private void  ajoutVaisseau() {
+    private void ajoutVaisseau() {
         vaisseau = new Vaisseau(this);
         vaisseau.setLocation(200, 580);
         panel_game.add(vaisseau);
@@ -175,7 +173,6 @@ public class Game extends JFrame implements KeyListener {
         } catch (Exception e) {
             System.out.println("moveAlien : " + e.getMessage());
         }
-
     }
 
     public void stopJeu() {
@@ -250,11 +247,28 @@ public class Game extends JFrame implements KeyListener {
         return this.score;
     }
 
-    public void gameOver() {
+    public void gameOver() throws SQLException {
         stopJeu();
-        JOptionPane.showMessageDialog(null, "Game Over");
-    }
+                
+        date = new Date();
+        bdd = new Bdd();
+        
+        cal = Calendar.getInstance();
+        cal.setTime(date);
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        dateAuj = year+"-"+month+"-"+day;
+         System.out.println(name + " "+ score + "  " + dateAuj);        
+        this.bdd.addScore(name, score, dateAuj);
+        
+        
+        JOptionPane.showMessageDialog(null, "Game Over");   
 
+                    
+        
+    }
+    
     public void finJeu() {
         stopJeu();
         lb_level.setText("Niveau : " + ++niveau);
