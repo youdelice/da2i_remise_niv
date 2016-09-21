@@ -42,11 +42,11 @@ public class MouvementProjectile extends Thread {
                 for (int i : indexVide) {
                     game.colonneAlien.remove(i);
                 }
-
-                if (game.colonneAlien.isEmpty()) {
-                    game.stopJeu();
-                    JOptionPane.showMessageDialog(null, "GG");
-                }
+//
+//                if (game.colonneAlien.isEmpty()) {
+//                    game.stopJeu();
+//                    JOptionPane.showMessageDialog(null, "GG");
+ //               }
 
                 Thread.sleep(Vitesse.NOVICE.getProjectiles());
             } catch (InterruptedException e) {

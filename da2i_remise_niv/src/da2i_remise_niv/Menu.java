@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package da2i_remise_niv;
 
 import java.awt.BorderLayout;
@@ -31,6 +25,7 @@ public class Menu extends JFrame {
     public JPanel panel2;
     public JButton bouton1;
     public JButton bouton2;
+    public JButton bt_difficulter;
 
 
     public Menu()  
@@ -45,7 +40,8 @@ public class Menu extends JFrame {
         
         bouton1 = new JButton("Game");
         bouton2 = new JButton("Score");
-
+        bt_difficulter = new JButton("Difficulter");
+        
         this.getContentPane().add(bouton1, BorderLayout.NORTH);
         this.getContentPane().add(bouton2, BorderLayout.SOUTH);
 
@@ -73,6 +69,15 @@ public class Menu extends JFrame {
                 //frame.setVisible(true);
             }
         });
+        bt_difficulter.addActionListener(new ActionListener () {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                   
+            }
+        });
+    
     }
     
     
