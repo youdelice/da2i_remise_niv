@@ -16,12 +16,12 @@ public class Score {
     int id;
     String pseudo;
     int score;
-    Date dateDone;
+    String dateDone;
 
     public Score() {
     }
 
-    public Score(int id, String pseudo, int score, Date dateDone) {
+    public Score(int id, String pseudo, int score, String dateDone) {
         this.id = id;
         this.pseudo = pseudo;
         this.score = score;
@@ -52,11 +52,11 @@ public class Score {
         this.score = score;
     }
 
-    public Date getDateDone() {
+    public String getDateDone() {
         return dateDone;
     }
 
-    public void setDateDone(Date dateDone) {
+    public void setDateDone(String dateDone) {
         this.dateDone = dateDone;
     }
     

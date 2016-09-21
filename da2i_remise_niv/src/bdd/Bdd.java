@@ -24,7 +24,7 @@ public class Bdd {
         try {
             Class.forName("org.postgresql.Driver");
             this.c = DriverManager
-            .getConnection("jdbc:postgresql://meleze14:5432/bd_spaceinv",
+            .getConnection("jdbc:postgresql://meleze24:5432/bd_spaceinv",
             "bdd", "root");
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,25 +65,29 @@ public class Bdd {
             int id = rs.getInt("id");
             String pseudo = rs.getString("pseudo");
             int score = rs.getInt("score");
-            String dateTp = rs.getString("dateDone");
-            String[] dateTps = dateTp.split("-");
-            Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
+            String dateDone = rs.getString("dateDone");
+            //String[] dateTps = dateTp.split("-");
+           // Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
             ret = new Score(id,pseudo,score,dateDone);
         }
         return ret;
     }
-    public List<Score> getAllScore() throws SQLException{
-        List<Score> ret = new ArrayList();
+    public List<String> getAllScore() throws SQLException{
+        List<String> ret = new ArrayList();
         Statement req = c.createStatement();
-        ResultSet rs = req.executeQuery("SELECT * FROM score WHERE id > 0;");
+        ResultSet rs = req.executeQuery("SELECT DISTINCT(pseudo) FROM score WHERE id > 0;");
         while(rs.next()){
-            int id = rs.getInt("id");
-            String pseudo = rs.getString("pseudo");
-            int score = rs.getInt("score");
-            String dateTp = rs.getString("dateDone");
-            String[] dateTps = dateTp.split("-");
-            Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
-            ret.add(new Score(id,pseudo,score,dateDone));
+            ret.add(rs.getString("pseudo"));
+        }
+        return ret;
+    }
+    
+    public List<String> getScore(String pseudo) throws SQLException{
+        List<String> ret = new ArrayList();
+        Statement req = c.createStatement(); // select score from score where pseudo = 'test 1' Order By score ASC
+        ResultSet rs = req.executeQuery("select score from score where pseudo = '"+ pseudo + "' Order By score DESC");
+        while(rs.next()){
+            ret.add(rs.getString("score"));
         }
         return ret;
     }

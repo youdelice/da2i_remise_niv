@@ -64,7 +64,7 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                Score frame = new Score();
+                ScoreJeu frame = new ScoreJeu();
                 
                 //frame.setVisible(true);
             }
