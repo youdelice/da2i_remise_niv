@@ -29,7 +29,8 @@ public class Game extends JFrame implements KeyListener {
     private JPanel panel_game;
     private JLabel lb_level;
     private int score = 0;
-    private int niveau = 1;
+    public int niveau = 1;
+
     public List<Alien> aliensLigne;
 
     public JLabel lb_score;
@@ -87,7 +88,9 @@ public class Game extends JFrame implements KeyListener {
         splitPane.setRightComponent(panel_level);
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+
         lb_level = new JLabel("Niveau : " + niveau);
+
         panel_level.add(lb_level);
 
         creerPlateau();
