@@ -75,7 +75,7 @@ public class Bdd {
     public List<Score> getAllScore() throws SQLException{
         List<Score> ret = new ArrayList();
         Statement req = c.createStatement();
-        ResultSet rs = req.executeQuery("SELECT * FROM score;");
+        ResultSet rs = req.executeQuery("SELECT * FROM score WHERE id > 0;");
         while(rs.next()){
             int id = rs.getInt("id");
             String pseudo = rs.getString("pseudo");

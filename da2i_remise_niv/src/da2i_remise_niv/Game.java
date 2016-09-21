@@ -2,9 +2,18 @@ package da2i_remise_niv;
 
 import bdd.Bdd;
 import java.awt.BorderLayout;
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.EventQueue;
+=======
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JSplitPane;
+>>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -29,17 +38,17 @@ public class Game extends JFrame implements KeyListener {
 
     private JPanel contentPane;
     private JPanel panel_game;
-    private JPanel panel;
     private JLabel lb_level;
-    private int score=0;
+    private int score = 0;
+    public int niveau = 1;
+
     public List<Alien> aliensLigne;
     private int niveau=0;
 
     public JLabel lb_score;
 
-
     public volatile List<List<Alien>> colonneAlien = new ArrayList<List<Alien>>();
-    
+
     public Boolean isEnCours = true;
     private Boolean cooldownTirer = false;
     private MouvementVaisseau mv;
@@ -54,16 +63,14 @@ public class Game extends JFrame implements KeyListener {
 
     Set<String> keyPressed = new HashSet<String>();
 
-    
-    
-    public void nom(){
+    public void nom() {
         name = JOptionPane.showInputDialog("");
-        if(name.isEmpty()){
-           System.exit(0);
+        if (name.isEmpty()) {
+            System.exit(0);
         }
-        
+
     }
-    
+
     public Game() {
         nom();
         setResizable(false);
@@ -94,12 +101,18 @@ public class Game extends JFrame implements KeyListener {
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         lb_level = new JLabel("Niveau : " + niveau);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
         panel_level.add(lb_level);
-        
 
         creerPlateau();
 
         this.addKeyListener(this);
+
+        Point p = new Point(260, 400);
+        System.out.println(p.x + " " + p.y);
 
         lancerJeu();
     }
@@ -115,23 +128,20 @@ public class Game extends JFrame implements KeyListener {
         panel_game.add(vaisseau);
     }
 
-    private void ajoutAlien() 
-    {
+    private void ajoutAlien() {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 1; i++) 
-        { 
+        for (int i = 0; i < 4; i++) {
             List<Alien> colonne = new ArrayList<Alien>();
-            
-            for (int j = 0; j < 1; j++) 
-            {
+
+            for (int j = 0; j < 5; j++) {
                 Alien alien = new Alien(this);
                 alien.setLocation(5 + i * 45, j * 40);
                 panel_game.add(alien);
                 colonne.add(alien);
                 aliensLigne.add(alien);
             }
-            
+
             this.colonneAlien.add(colonne);
         }
     }
@@ -142,7 +152,7 @@ public class Game extends JFrame implements KeyListener {
 
         mv = new MouvementVaisseau(this);
         mv.start();
-        
+
         ta = new TireAlien(this);
         ta.start();
     }
@@ -161,26 +171,29 @@ public class Game extends JFrame implements KeyListener {
                 }
             }
 
-            for (Alien alien : aliensLigne) {
-                alien.setLocation(alien.getLocation().x + SENS_ALIEN, alien.getLocation().y + descendre);
+            if (aliensLigne.isEmpty()) {
+                finJeu();
+            } else {
+                for (Alien alien : aliensLigne) {
+                    alien.setLocation(alien.getLocation().x + SENS_ALIEN, alien.getLocation().y + descendre);
+                }
             }
         } catch (Exception e) {
-
+            System.out.println("moveAlien : " + e.getMessage());
         }
+<<<<<<< HEAD
 
         gameOver();
+=======
+>>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
     }
-    
-    public void stopJeu()
-    {
-        if(isEnCours)
-        {
-            isEnCours = false;  
+
+    public void stopJeu() {
+        if (isEnCours) {
+            isEnCours = false;
             this.keyPressed.clear();
             this.SENS_VAISSEAU = 0;
-        }        
-        else
-        {
+        } else {
             isEnCours = true;
             lancerJeu();
         }
@@ -193,8 +206,6 @@ public class Game extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) // q = 81      d = 68		espace = 32
     {
-        System.out.println(e.getKeyCode());
-        
         this.keyPressed.add(String.valueOf(e.getKeyChar()));
 
         if (e.getKeyCode() == 32 && !cooldownTirer) {
@@ -211,9 +222,10 @@ public class Game extends JFrame implements KeyListener {
             }, 500);
         }
 
-        if(e.getKeyCode() == 27)
+        if (e.getKeyCode() == 27) {
             this.stopJeu();
-        
+        }
+
         if (e.getKeyCode() == 81) {
             this.SENS_VAISSEAU = -8;
         }
@@ -239,16 +251,15 @@ public class Game extends JFrame implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
-    
-    public void setScore(int newScore)
-    {
+
+    public void setScore(int newScore) {
         this.score = newScore;
     }
-    
-    public int getScore()
-    {
+
+    public int getScore() {
         return this.score;
     }
+<<<<<<< HEAD
     
     public void gameOver(){
         if(aliensLigne.isEmpty() && !fini){
@@ -257,5 +268,20 @@ public class Game extends JFrame implements KeyListener {
             this.niveau+=2;
             lancerJeu();
         }
+=======
+
+    public void gameOver() {
+        stopJeu();
+        JOptionPane.showMessageDialog(null, "Game Over");
+    }
+
+    public void finJeu() {
+        stopJeu();
+        lb_level.setText("Niveau : " + ++niveau);
+        panel_game.removeAll();
+        ajoutVaisseau();
+        ajoutAlien();
+        lancerJeu();
+>>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
     }
 }

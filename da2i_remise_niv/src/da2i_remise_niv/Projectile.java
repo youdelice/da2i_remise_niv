@@ -22,15 +22,18 @@ public class Projectile extends JPanel
 		this.setLocation(p);
 		
 		fenetre.getPanelGame().add(this);
-		fenetre.getPanelGame().repaint();
-		fenetre.getPanelGame().revalidate();
 	}
 
 	public void removeProjectile()
 	{
-		fenetre.getPanelGame().remove(this);
-		fenetre.getPanelGame().repaint();
-		this.invalidate();
-                
+            try
+            {
+                fenetre.getPanelGame().remove(this);
+                fenetre.getPanelGame().repaint();
+            }catch(Exception e)
+            {
+                System.out.println("removeProjectile : " + e.getMessage());
+            }
+		
 	}
 }
