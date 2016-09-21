@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ public class Game extends JFrame implements KeyListener {
     private JPanel panel_game;
     private JLabel lb_level;
     private int score = 0;
-    public int niv = 1;
+    public int niveau = 1;
+
     public List<Alien> aliensLigne;
 
     public JLabel lb_score;
@@ -86,13 +88,18 @@ public class Game extends JFrame implements KeyListener {
         splitPane.setRightComponent(panel_level);
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        lb_level = new JLabel("Niveau : "+ niv);
+
+        lb_level = new JLabel("Niveau : " + niveau);
+
         panel_level.add(lb_level);
 
         creerPlateau();
 
         this.addKeyListener(this);
 
+        Point p = new Point(260,400);
+        System.out.println(p.x + " " + p.y);
+        
         lancerJeu();
     }
 
@@ -110,7 +117,7 @@ public class Game extends JFrame implements KeyListener {
     private void ajoutAlien() {
         aliensLigne = new ArrayList<Alien>();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             List<Alien> colonne = new ArrayList<Alien>();
 
             for (int j = 0; j < 5; j++) {
@@ -241,6 +248,18 @@ public class Game extends JFrame implements KeyListener {
 
     public void finJeu() {
         stopJeu();
-        JOptionPane.showMessageDialog(null, "GG");
+        lb_level.setText("Niveau : " + ++niveau);
+        panel_game.removeAll();
+        ajoutVaisseau();
+        ajoutAlien();
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            
+            @Override
+            public void run() {
+                lancerJeu();
+            }
+            
+        }, 2000);
     }
 }

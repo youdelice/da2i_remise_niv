@@ -12,7 +12,7 @@ public class MouvementAlien extends Thread
 
     @Override
     public void run() {
-        checkNiv(fenetre.niv);
+        checkNiv(fenetre.niveau);
         System.out.println(v);
         while (fenetre.isEnCours) {
             try {
