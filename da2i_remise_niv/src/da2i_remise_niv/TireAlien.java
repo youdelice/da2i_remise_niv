@@ -1,6 +1,5 @@
 package da2i_remise_niv;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
