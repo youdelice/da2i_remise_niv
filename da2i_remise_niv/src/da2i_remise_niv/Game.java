@@ -2,16 +2,13 @@ package da2i_remise_niv;
 
 import bdd.Bdd;
 import java.awt.BorderLayout;
-<<<<<<< HEAD
-import java.awt.Color;
-import java.awt.EventQueue;
-=======
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
->>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
+
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -43,7 +40,7 @@ public class Game extends JFrame implements KeyListener {
     public int niveau = 1;
 
     public List<Alien> aliensLigne;
-    private int niveau=0;
+
 
     public JLabel lb_score;
 
@@ -101,10 +98,7 @@ public class Game extends JFrame implements KeyListener {
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         lb_level = new JLabel("Niveau : " + niveau);
-<<<<<<< HEAD
-=======
 
->>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
         panel_level.add(lb_level);
 
         creerPlateau();
@@ -181,11 +175,7 @@ public class Game extends JFrame implements KeyListener {
         } catch (Exception e) {
             System.out.println("moveAlien : " + e.getMessage());
         }
-<<<<<<< HEAD
 
-        gameOver();
-=======
->>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
     }
 
     public void stopJeu() {
@@ -259,16 +249,6 @@ public class Game extends JFrame implements KeyListener {
     public int getScore() {
         return this.score;
     }
-<<<<<<< HEAD
-    
-    public void gameOver(){
-        if(aliensLigne.isEmpty() && !fini){
-            JOptionPane.showMessageDialog(null, "GG");
-            fini = true;
-            this.niveau+=2;
-            lancerJeu();
-        }
-=======
 
     public void gameOver() {
         stopJeu();
@@ -282,6 +262,5 @@ public class Game extends JFrame implements KeyListener {
         ajoutVaisseau();
         ajoutAlien();
         lancerJeu();
->>>>>>> 765c897fa740f21d4f106a3fe5080fc7ea2b389d
     }
 }
