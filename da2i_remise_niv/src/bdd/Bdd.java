@@ -65,9 +65,9 @@ public class Bdd {
             int id = rs.getInt("id");
             String pseudo = rs.getString("pseudo");
             int score = rs.getInt("score");
-            String dateTp = rs.getString("dateDone");
-            String[] dateTps = dateTp.split("-");
-            Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
+            String dateDone = rs.getString("dateDone");
+            //String[] dateTps = dateTp.split("-");
+           // Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
             ret = new Score(id,pseudo,score,dateDone);
         }
         return ret;
@@ -80,9 +80,9 @@ public class Bdd {
             int id = rs.getInt("id");
             String pseudo = rs.getString("pseudo");
             int score = rs.getInt("score");
-            String dateTp = rs.getString("dateDone");
-            String[] dateTps = dateTp.split("-");
-            Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
+            String dateDone = rs.getString("dateDone");
+           // String[] dateTps = dateTp.split("-");
+            //Date dateDone = new Date(Integer.getInteger(dateTps[0]),Integer.getInteger(dateTps[1]),Integer.getInteger(dateTps[2]));
             ret.add(new Score(id,pseudo,score,dateDone));
         }
         return ret;
