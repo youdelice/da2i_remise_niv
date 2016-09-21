@@ -7,14 +7,21 @@ public class MouvementProjectileAlien extends Thread {
 
     private Game fenetre;
     private Projectile projectile;
+    private int v = 100;
 
     public MouvementProjectileAlien(Projectile projectile, Game fenetre) {
         this.fenetre = fenetre;
         this.projectile = projectile;
     }
+    public int checkNiv(int i){
+        v -= (i-1)*5; 
+        System.out.println(v);
+        return v;
+    }
 
     @Override
     public void run() {
+        checkNiv(fenetre.niveau);
         while ((projectile.getLocation().y < fenetre.getPanelGame().getHeight() - projectile.getHeight() - 10) && fenetre.isEnCours) {
             try {
                 Point p = projectile.getLocation();
@@ -24,7 +31,7 @@ public class MouvementProjectileAlien extends Thread {
                 projectile.setLocation(p);
                 colision();
 
-                Thread.sleep(50);
+                Thread.sleep(v);
             } catch (Exception e) {
                 System.out.println("MouvementProjectileAlien : " + e.getMessage());
             }

@@ -88,7 +88,6 @@ public class Game extends JFrame implements KeyListener {
         splitPane.setRightComponent(panel_level);
         panel_level.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-
         lb_level = new JLabel("Niveau : " + niveau);
 
         panel_level.add(lb_level);
@@ -97,9 +96,9 @@ public class Game extends JFrame implements KeyListener {
 
         this.addKeyListener(this);
 
-        Point p = new Point(260,400);
+        Point p = new Point(260, 400);
         System.out.println(p.x + " " + p.y);
-        
+
         lancerJeu();
     }
 
@@ -252,14 +251,6 @@ public class Game extends JFrame implements KeyListener {
         panel_game.removeAll();
         ajoutVaisseau();
         ajoutAlien();
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            
-            @Override
-            public void run() {
-                lancerJeu();
-            }
-            
-        }, 2000);
+        lancerJeu();
     }
 }

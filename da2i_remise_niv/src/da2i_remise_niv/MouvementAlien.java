@@ -3,7 +3,7 @@ package da2i_remise_niv;
 public class MouvementAlien extends Thread 
 {
     private Game fenetre;
-    private int v;
+    private int v = 150;
 
     public MouvementAlien(Game fenetre) 
     {
@@ -25,17 +25,8 @@ public class MouvementAlien extends Thread
     }
     
     public int checkNiv(int i){
-        switch(i){
-            case 1 :
-                v= Vitesse.DEBUTANT.getVitesse();
-                break;
-            case 2 :
-                v= Vitesse.NOVICE.getVitesse();
-                break;
-            case 3:
-                v = Vitesse.MAITRE.getVitesse();
-                break;
-        }
+        
+        v -= (i-1)*10; 
         return v;
     }
 }
