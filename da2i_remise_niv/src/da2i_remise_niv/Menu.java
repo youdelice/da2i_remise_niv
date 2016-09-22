@@ -26,6 +26,7 @@ public class Menu extends JFrame {
     public JButton bouton1;
     public JButton bouton2;
     public JButton bt_difficulter;
+    public ScoreJeu fenetreScore;
 
 
     public Menu()  
@@ -59,16 +60,9 @@ public class Menu extends JFrame {
                 frame.setVisible(true);
             }
         });
-        bouton2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                ScoreJeu frame = new ScoreJeu();
-                
-                //frame.setVisible(true);
-            }
-        });
+        
+        bouton2.addActionListener(new Bt_showFenetreScore(this));
+        
         bt_difficulter.addActionListener(new ActionListener () {
             
             @Override
@@ -99,7 +93,6 @@ public class Menu extends JFrame {
                 }
             }
         });
-    }
-    
+    }   
     
 }
