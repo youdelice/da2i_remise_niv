@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
-
+import bdd.Bdd;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +25,7 @@ import javax.swing.ListSelectionModel;
  */
 public class ScoreJeu extends JFrame implements WindowListener
 {
-	// private Bdd dd;
+	private Bdd dd;
 	private List<String> liste;
 	private List<String> listScore;
 	private Menu fenetre;
@@ -52,9 +52,9 @@ public class ScoreJeu extends JFrame implements WindowListener
 	{ // ((DefaultListModel)list2.getModel()).addElement(String.valueOf(liste.get(i).getScore()));
 		try
 		{
-			// dd = new Bdd();
+			 dd = new Bdd();
 
-			// liste = dd.getAllScore();
+			 liste = dd.getAllScore();
 			System.out.println(liste.size());
 			String[] nomJoueur = new String[liste.size()];
 			String[] scoreJoueur = new String[liste.size()];
