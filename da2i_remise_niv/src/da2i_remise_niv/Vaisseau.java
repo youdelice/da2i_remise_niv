@@ -35,11 +35,12 @@ public class Vaisseau extends JPanel
 		Point p = this.getLocation();
 		
 		p.x += (int)this.getSize().getWidth() / 2;
-              //  p.y -= this.getHeight();
+		p.y -= 15;
 		
 		Projectile projectile = new Projectile(p, fenetre, true);
                 
-		MouvementProjectile mv = new MouvementProjectile(projectile,fenetre);
+		MouvementProjectileVaisseau mv = new MouvementProjectileVaisseau(projectile,fenetre);
+		fenetre.listProjectileVaisseau.add(mv);
 		mv.start();
 	}
 }

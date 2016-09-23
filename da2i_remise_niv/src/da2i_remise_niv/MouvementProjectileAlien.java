@@ -1,64 +1,74 @@
 package da2i_remise_niv;
 
-import bdd.Bdd;
 import java.awt.Point;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JOptionPane;
 
 public class MouvementProjectileAlien extends Thread {
 
-    private Game fenetre;
-    private Projectile projectile;
-    private int v = 100;
+	private Game fenetre;
+	private Projectile projectile;
+	private Boolean toucher;
+	private int v = 100;
+	private Boolean isOk = true;
 
-    
-    public MouvementProjectileAlien(Projectile projectile, Game fenetre) {
-        this.fenetre = fenetre;
-        this.projectile = projectile;
-    }
-    public int checkNiv(int i){
-        v -= (i-1)*5; 
-        System.out.println(v);
-        return v;
-    }
+	public MouvementProjectileAlien(Projectile projectile, Game fenetre)
+	{
+		this.fenetre = fenetre;
+		this.projectile = projectile;
+	}
 
-    @Override
-    public void run() {
-        checkNiv(fenetre.niveau);
-        while ((projectile.getLocation().y < fenetre.getPanelGame().getHeight() - projectile.getHeight() - 10) && fenetre.isEnCours) {
-            try {
-                Point p = projectile.getLocation();
+	public int checkNiv(int i)
+	{
+		v -= (i - 1) * 5;
+		System.out.println(v);
+		return v;
+	}
 
-                p.y += 10;
+	@Override
+	public void run()
+	{
+		checkNiv(fenetre.niveau);
+		while ((projectile.getY() + 15) < (fenetre.getPanelGame().getHeight() - 10) && isOk)
+		{
+			try
+			{
+				Point p = projectile.getLocation();
 
-                projectile.setLocation(p);
-                colision();
+				p.y += 15;
 
-                Thread.sleep(v);
-            } catch (Exception e) {
-                System.out.println("MouvementProjectileAlien : " + e.getMessage());
-            }
-        }
+				projectile.setLocation(p);
+				colision();
 
-        projectile.removeProjectile();
-    }
+				Thread.sleep(v);
+			} catch (Exception e)
+			{
+				System.out.println("MouvementProjectileAlien : " + e.getMessage());
+			}
+		}
 
-    public void colision() {
-        try {
-            if ((projectile.getY() >= fenetre.vaisseau.getY()) && (projectile.getY() <= fenetre.vaisseau.getY() + fenetre.vaisseau.getHeight())) {
-                if ((projectile.getX() >= fenetre.vaisseau.getX()) && (projectile.getX() <= fenetre.vaisseau.getX() + fenetre.vaisseau.getWidth())) {
-                    System.out.println("touché ");
+		fenetre.listProjectileAlien.remove(this);
+		projectile.removeProjectile();
+	}
 
-                    this.projectile.removeProjectile();  
-                    fenetre.gameOver();                 
-                    projectile = null;
-                    this.join();
+	public void colision()
+	{
+		try
+		{
+			if ((projectile.getY() >= fenetre.vaisseau.getY()) && (projectile.getY() <= (fenetre.vaisseau.getY() + fenetre.vaisseau.getHeight())))
+			{
+				if (((projectile.getX() >= fenetre.vaisseau.getX()) && (projectile.getX() <= fenetre.vaisseau.getX() + fenetre.vaisseau.getWidth()))
+				)
+				{
+					fenetre.gameOver();
+				}
+			}
+		} catch (Exception e)
+		{
+			System.out.println("MouvementProjectileAlien colision : " + e.getMessage());
+		}
+	}
 
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("MouvementProjectileAlien colision : " + e.getMessage());
-        }
-    }
+	public void stopThread()
+	{
+		isOk = false;
+	}
 }

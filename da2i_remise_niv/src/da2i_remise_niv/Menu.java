@@ -32,6 +32,7 @@ public class Menu extends JFrame {
     public Menu()  
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setBounds(100, 100, 500, 700);
         panel1 = new JPanel();
         ImageIcon image = new ImageIcon(getClass().getClassLoader().getResource("Ressources/SIArcadeCabImage.jpg"));

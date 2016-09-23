@@ -10,35 +10,41 @@ import javax.swing.JPanel;
 
 public class Alien extends JPanel {
 
-    private static final long serialVersionUID = 1L;
-    Game fenetre;
+	private static final long serialVersionUID = 1L;
+	Game fenetre;
 
-    public Alien(Game fenetre) {
-        this.fenetre = fenetre;
-        this.setSize(new Dimension(40, 40));
-    }
+	public Alien(Game fenetre)
+	{
+		this.fenetre = fenetre;
+		this.setSize(new Dimension(40, 40));
+	}
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
 
-        Image img = new ImageIcon(getClass().getClassLoader().getResource("Ressources/alien.png")).getImage();
+		Image img = new ImageIcon(getClass().getClassLoader().getResource("Ressources/alien.png")).getImage();
 
-        g.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
-    }
+		g.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
+	}
 
-    public void tirer() {
-        Point location = this.getLocation();
+	public void tirer()
+	{
+		Point location = this.getLocation();
 
-        location.x += this.getSize().width / 2;
+		location.x += this.getSize().width / 2;
 
-        Projectile p = new Projectile(location, fenetre, false);
+		Projectile p = new Projectile(location, fenetre, false);
 
-        MouvementProjectileAlien mv = new MouvementProjectileAlien(p, fenetre);
-        mv.start();
-    }
+		MouvementProjectileAlien mv = new MouvementProjectileAlien(p, fenetre);
+		fenetre.listProjectileAlien.add(mv);
+		mv.start();
+	}
 
-    public void removeAlien() {
-        this.fenetre.getPanelGame().remove(this);
-    }
+	public void removeAlien()
+	{
+		this.setLocation(1000, 1000);
+		this.fenetre.getPanelGame().remove(this);
+	}
 }

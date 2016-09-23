@@ -23,7 +23,7 @@ public class MouvementVaisseau extends Thread {
 
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                System.out.println("MouvementVaisseau : " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }

@@ -19,7 +19,7 @@ public class MouvementProjectile extends Thread {
         Point p = projectile.getLocation();
         p.y -= 15;
 
-        while (projectile.getLocation().y > 10 && game.isEnCours) {
+        while (projectile.getLocation().y > 10) {
             try {
                 p = projectile.getLocation();
 

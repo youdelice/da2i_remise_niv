@@ -1,5 +1,6 @@
 package da2i_remise_niv;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,34 +14,42 @@ public class TireAlien extends Thread {
     }
 
     @Override
-    public void run() {
-        while (fenetre.isEnCours) {
-            Timer t = new Timer();
-            try {
-                Random rand = new Random();
-                
-                final int listAlien = (fenetre.colonneAlien.size()-1) == 0 ? 0 : rand.nextInt(fenetre.colonneAlien.size() - 1);
-                
-                t.schedule(new TimerTask() {
-                    
-                    @Override
-                    public void run()
-                    {
-                        try{
-                           fenetre.colonneAlien.get(listAlien).get(fenetre.colonneAlien.get(listAlien).size() - 1).tirer(); 
-                        }catch(Exception e)
-                        {
-                            System.out.println("TireAlien task : " + e.getMessage());
-                        }
-                    }
-                }, rand.nextInt(1250));
+	public void run()
+	{
+        while (fenetre.isEnCours) 
+        {
+			int nombreColonne = fenetre.listAlien.size() - 1;
+			
+			if(nombreColonne != -1)
+			{
+				Random rand = new Random();
+				int colonne = rand.nextInt(nombreColonne);
 
-                Thread.sleep(250);
-            } catch (Exception e) 
-            {
-                   System.out.println("TireAlien : " + e.getMessage());
-            }
-             t.cancel();
+				final List<Alien> aliens = fenetre.listAlien.get(colonne);
+
+				Timer t = new Timer();
+				t.schedule(new TimerTask()
+				{
+
+					@Override
+					public void run()
+					{
+						if (fenetre.isEnCours)
+							aliens.get(aliens.size() - 1).tirer();
+					}
+
+				}, rand.nextInt(1000));
+
+			}
+			
+			try
+			{
+				Thread.sleep(1250);
+			} catch (Exception e)
+			{
+
+			}
         }
+		System.out.println("ta");
     }
 }
